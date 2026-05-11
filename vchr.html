@@ -1,0 +1,266 @@
+
+
+```html
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Voucher WiFi</title>
+<style>
+body{
+    margin:0;
+    padding:20px;
+    font-family:Arial, sans-serif;
+    background:linear-gradient(135deg,#0f172a,#1e293b);
+    color:white;
+}
+
+.container{
+    max-width:900px;
+    margin:auto;
+}
+
+h1{
+    text-align:center;
+    margin-bottom:25px;
+}
+
+.table-box{
+    overflow-x:auto;
+}
+
+table{
+    width:100%;
+    border-collapse:collapse;
+    background:rgba(255,255,255,0.08);
+    backdrop-filter:blur(8px);
+    border-radius:15px;
+    overflow:hidden;
+}
+
+th,td{
+    padding:15px;
+    text-align:center;
+    border-bottom:1px solid rgba(255,255,255,0.1);
+}
+
+th{
+    background:#2563eb;
+}
+
+button{
+    padding:10px 18px;
+    border:none;
+    border-radius:10px;
+    cursor:pointer;
+    color:white;
+    font-weight:bold;
+    transition:0.3s;
+}
+
+button:hover{
+    transform:scale(1.05);
+}
+
+.btn7{background:#16a34a;}
+.btn2{background:#ea580c;}
+.btn1{background:#dc2626;}
+.btn30{background:#7c3aed;}
+
+.voucher-box{
+    margin-top:30px;
+    background:rgba(255,255,255,0.08);
+    padding:20px;
+    border-radius:15px;
+    display:none;
+}
+
+.code{
+    font-size:22px;
+    margin:15px 0;
+    color:#facc15;
+    font-weight:bold;
+}
+
+.use-btn{
+    background:#2563eb;
+}
+
+.stock{
+    font-weight:bold;
+    color:#4ade80;
+}
+
+.empty{
+    color:#f87171;
+}
+</style>
+</head>
+<body>
+
+<div class="container">
+    <div style="text-align:center; margin-bottom:20px;">
+        <img src="<img src="logo.png" alt="Logo" style="width:90px;height:90px;border-radius:50%;background:white;padding:10px;box-shadow:0 0 15px rgba(255,255,255,0.3);">
+    </div>
+
+    <h1>🎫 Tabel Voucher WiFi</h1>
+
+    <div class="table-box">
+        <table>
+            <thead>
+                <tr>
+                    <th>Jenis Voucher</th>
+                    <th>Masa Aktif</th>
+                    <th>Stok</th>
+                    <th>Aksi</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>Voucher 7 Hari</td>
+                    <td>7 Hari</td>
+                    <td class="stock" id="stock7">3</td>
+                    <td>
+                        <button class="btn7" onclick="showVoucher('7')">Buka Voucher</button>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td>Voucher 2 Hari</td>
+                    <td>2 Hari</td>
+                    <td class="stock" id="stock2">3</td>
+                    <td>
+                        <button class="btn2" onclick="showVoucher('2')">Buka Voucher</button>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td>Voucher 1 Hari</td>
+                    <td>1 Hari</td>
+                    <td class="stock" id="stock1">3</td>
+                    <td>
+                        <button class="btn1" onclick="showVoucher('1')">Buka Voucher</button>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td>Voucher 30 Hari</td>
+                    <td>30 Hari</td>
+                    <td class="stock" id="stock30">3</td>
+                    <td>
+                        <button class="btn30" onclick="showVoucher('30')">Buka Voucher</button>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <div class="voucher-box" id="voucherBox">
+        <h2 id="voucherTitle"></h2>
+        <div class="code" id="voucherCode"></div>
+        <button class="use-btn" onclick="useVoucher()">Gunakan Voucher</button>
+    </div>
+</div>
+
+<script>
+const vouchers = {
+    7: [
+        'VCR7-AAA111',
+        'VCR7-BBB222',
+        'VCR7-CCC333'
+    ],
+
+    2: [
+        'VCR2-AAA111',
+        'VCR2-BBB222',
+        'VCR2-CCC333'
+    ],
+
+    1: [
+        'VCR1-AAA111',
+        'VCR1-BBB222',
+        'VCR1-CCC333'
+    ],
+
+    30: [
+        'VCR30-AAA111',
+        'VCR30-BBB222',
+        'VCR30-CCC333'
+    ]
+};
+
+let currentType = '';
+
+function saveData(){
+    localStorage.setItem('voucherData', JSON.stringify(vouchers));
+}
+
+function loadData(){
+    const data = localStorage.getItem('voucherData');
+
+    if(data){
+        const parsed = JSON.parse(data);
+
+        Object.keys(parsed).forEach(key=>{
+            vouchers[key] = parsed[key];
+        });
+    }
+
+    updateStocks();
+}
+
+function updateStocks(){
+    document.getElementById('stock7').innerText = vouchers[7].length;
+    document.getElementById('stock2').innerText = vouchers[2].length;
+    document.getElementById('stock1').innerText = vouchers[1].length;
+    document.getElementById('stock30').innerText = vouchers[30].length;
+
+    checkEmpty('7');
+    checkEmpty('2');
+    checkEmpty('1');
+    checkEmpty('30');
+}
+
+function checkEmpty(type){
+    const stockElement = document.getElementById('stock'+type);
+
+    if(vouchers[type].length <= 0){
+        stockElement.classList.add('empty');
+    }
+}
+
+function showVoucher(type){
+    currentType = type;
+
+    if(vouchers[type].length <= 0){
+        alert('Stok voucher habis');
+        return;
+    }
+
+    document.getElementById('voucherBox').style.display = 'block';
+    document.getElementById('voucherTitle').innerText = 'Kode Voucher '+type+' Hari';
+    document.getElementById('voucherCode').innerText = vouchers[type][0];
+}
+
+function useVoucher(){
+    if(currentType === '') return;
+
+    vouchers[currentType].shift();
+
+    saveData();
+    updateStocks();
+
+    alert('Voucher berhasil digunakan');
+
+    document.getElementById('voucherBox').style.display = 'none';
+}
+
+loadData();
+</script>
+
+</body>
+</html>
+```
+
+
