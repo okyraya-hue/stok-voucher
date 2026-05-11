@@ -4,7 +4,8 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Voucher WiFi</title>
+<title>Voucher WiFi Offline</title>
+<link rel="manifest" href="manifest.json">
 <style>
 body{
     margin:0;
@@ -92,6 +93,40 @@ button:hover{
 
 .empty{
     color:#f87171;
+}
+
+
+@media(max-width:700px){
+    body{
+        padding:10px;
+    }
+
+    h1{
+        font-size:24px;
+    }
+
+    table{
+        font-size:13px;
+    }
+
+    th,td{
+        padding:10px 6px;
+    }
+
+    button{
+        width:100%;
+        padding:10px;
+        font-size:13px;
+    }
+
+    .voucher-box{
+        padding:15px;
+    }
+
+    .code{
+        font-size:18px;
+        word-break:break-all;
+    }
 }
 </style>
 </head>
@@ -255,6 +290,12 @@ function useVoucher(){
 }
 
 loadData();
+</script>
+
+<script>
+if('serviceWorker' in navigator){
+    navigator.serviceWorker.register('sw.js');
+}
 </script>
 
 </body>
