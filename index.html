@@ -4,12 +4,12 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Voucher WiFi Offline</title>
-<link rel="manifest" href="manifest.json">
+
 <style>
 body{
     margin:0;
-    padding:20px;
-    font-family:Arial, sans-serif;
+    padding:6px;
+    font-family:Arial,sans-serif;
     background:linear-gradient(135deg,#0f172a,#1e293b);
     color:white;
 }
@@ -19,9 +19,24 @@ body{
     margin:auto;
 }
 
+.logo-box{
+    text-align:center;
+    margin-bottom:15px;
+}
+
+.logo-box img{
+    width:65px;
+    height:65px;
+    border-radius:50%;
+    background:white;
+    padding:6px;
+    box-shadow:0 0 10px rgba(255,255,255,0.3);
+}
+
 h1{
     text-align:center;
-    margin-bottom:25px;
+    font-size:20px;
+    margin-bottom:15px;
 }
 
 .table-box{
@@ -32,33 +47,30 @@ table{
     width:100%;
     border-collapse:collapse;
     background:rgba(255,255,255,0.08);
-    backdrop-filter:blur(8px);
-    border-radius:15px;
+    border-radius:12px;
     overflow:hidden;
-}
-
-th,td{
-    padding:15px;
-    text-align:center;
-    border-bottom:1px solid rgba(255,255,255,0.1);
+    font-size:11px;
 }
 
 th{
     background:#2563eb;
 }
 
-button{
-    padding:10px 18px;
-    border:none;
-    border-radius:10px;
-    cursor:pointer;
-    color:white;
-    font-weight:bold;
-    transition:0.3s;
+th,td{
+    padding:8px 4px;
+    text-align:center;
+    border-bottom:1px solid rgba(255,255,255,0.1);
 }
 
-button:hover{
-    transform:scale(1.05);
+button{
+    width:100%;
+    padding:7px;
+    border:none;
+    border-radius:7px;
+    cursor:pointer;
+    color:white;
+    font-size:11px;
+    font-weight:bold;
 }
 
 .btn7{background:#16a34a;}
@@ -67,18 +79,20 @@ button:hover{
 .btn30{background:#7c3aed;}
 
 .voucher-box{
-    margin-top:30px;
+    margin-top:15px;
     background:rgba(255,255,255,0.08);
-    padding:20px;
-    border-radius:15px;
+    padding:12px;
+    border-radius:12px;
     display:none;
+    text-align:center;
 }
 
 .code{
-    font-size:22px;
-    margin:15px 0;
+    font-size:16px;
+    margin:12px 0;
     color:#facc15;
     font-weight:bold;
+    word-break:break-all;
 }
 
 .use-btn{
@@ -86,59 +100,44 @@ button:hover{
 }
 
 .stock{
-    font-weight:bold;
     color:#4ade80;
+    font-weight:bold;
 }
 
 .empty{
     color:#f87171;
 }
 
+@media(min-width:700px){
 
-@media(max-width:700px){
     body{
-        padding:6px;
-    }
-
-    .container{
-        width:100%;
+        padding:20px;
     }
 
     h1{
-        font-size:19px;
-        margin-bottom:15px;
+        font-size:28px;
     }
 
     table{
-        font-size:11px;
+        font-size:15px;
     }
 
     th,td{
-        padding:7px 4px;
+        padding:15px;
     }
 
     button{
-        width:100%;
-        padding:7px;
-        font-size:11px;
-        border-radius:7px;
+        font-size:14px;
+        padding:10px;
     }
 
-    .voucher-box{
-        padding:10px;
-        margin-top:15px;
+    .logo-box img{
+        width:90px;
+        height:90px;
     }
 
     .code{
-        font-size:14px;
-        word-break:break-all;
-    }
-
-    img{
-        width:65px !important;
-        height:65px !important;
-    }
-}
+        font-size:22px;
     }
 }
 </style>
@@ -146,8 +145,9 @@ button:hover{
 <body>
 
 <div class="container">
-    <div style="text-align:center; margin-bottom:20px;">
-        <img src="logo.png" alt="Logo" style="width:90px;height:90px;border-radius:50%;background:white;padding:10px;box-shadow:0 0 15px rgba(255,255,255,0.3);">
+
+    <div class="logo-box">
+        <img src="logo.png" alt="Logo">
     </div>
 
     <h1>🎫 Tabel Voucher WiFi</h1>
@@ -156,101 +156,126 @@ button:hover{
         <table>
             <thead>
                 <tr>
-                    <th>Jenis Voucher</th>
-                    <th>Masa Aktif</th>
+                    <th>Voucher</th>
+                    <th>Aktif</th>
                     <th>Stok</th>
-                    <th>Aksi</th>
+                    <th>Buka</th>
                 </tr>
             </thead>
+
             <tbody>
+
                 <tr>
-                    <td>Voucher 7 Hari</td>
+                    <td>7 Hari</td>
                     <td>7 Hari</td>
                     <td class="stock" id="stock7">3</td>
                     <td>
-                        <button class="btn7" onclick="showVoucher('7')">Buka Voucher</button>
+                        <button class="btn7" onclick="showVoucher('7')">
+                            Buka
+                        </button>
                     </td>
                 </tr>
 
                 <tr>
-                    <td>Voucher 2 Hari</td>
+                    <td>2 Hari</td>
                     <td>2 Hari</td>
                     <td class="stock" id="stock2">3</td>
                     <td>
-                        <button class="btn2" onclick="showVoucher('2')">Buka Voucher</button>
+                        <button class="btn2" onclick="showVoucher('2')">
+                            Buka
+                        </button>
                     </td>
                 </tr>
 
                 <tr>
-                    <td>Voucher 1 Hari</td>
+                    <td>1 Hari</td>
                     <td>1 Hari</td>
                     <td class="stock" id="stock1">3</td>
                     <td>
-                        <button class="btn1" onclick="showVoucher('1')">Buka Voucher</button>
+                        <button class="btn1" onclick="showVoucher('1')">
+                            Buka
+                        </button>
                     </td>
                 </tr>
 
                 <tr>
-                    <td>Voucher 30 Hari</td>
+                    <td>30 Hari</td>
                     <td>30 Hari</td>
                     <td class="stock" id="stock30">3</td>
                     <td>
-                        <button class="btn30" onclick="showVoucher('30')">Buka Voucher</button>
+                        <button class="btn30" onclick="showVoucher('30')">
+                            Buka
+                        </button>
                     </td>
                 </tr>
+
             </tbody>
         </table>
     </div>
 
     <div class="voucher-box" id="voucherBox">
+
         <h2 id="voucherTitle"></h2>
+
         <div class="code" id="voucherCode"></div>
-        <button class="use-btn" onclick="useVoucher()">Gunakan Voucher</button>
+
+        <button class="use-btn" onclick="useVoucher()">
+            Gunakan Voucher
+        </button>
+
     </div>
+
 </div>
 
 <script>
+
 const vouchers = {
-    7: [
+
+    7:[
         '5947',
         '7823',
         '7486'
     ],
 
-    2: [
+    2:[
         'hcm922',
         'udf239',
         'naa722'
     ],
 
-    1: [
+    1:[
         '4u2Z',
         't9rb',
         'unse'
-'
     ],
 
-    30: [
+    30:[
         '2393',
         '5566',
         '9225'
-    ],
+    ]
 };
 
-let currentType = '';
+let currentType='';
 
 function saveData(){
-    localStorage.setItem('voucherData', JSON.stringify(vouchers));
+    localStorage.setItem(
+        'voucherData',
+        JSON.stringify(vouchers)
+    );
 }
 
 function loadData(){
-    const data = localStorage.getItem('voucherData');
+
+    const data=
+    localStorage.getItem('voucherData');
 
     if(data){
-        const parsed = JSON.parse(data);
+
+        const parsed=JSON.parse(data);
 
         Object.keys(parsed).forEach(key=>{
-            vouchers[key] = parsed[key];
+            vouchers[key]=parsed[key];
         });
     }
 
@@ -258,10 +283,18 @@ function loadData(){
 }
 
 function updateStocks(){
-    document.getElementById('stock7').innerText = vouchers[7].length;
-    document.getElementById('stock2').innerText = vouchers[2].length;
-    document.getElementById('stock1').innerText = vouchers[1].length;
-    document.getElementById('stock30').innerText = vouchers[30].length;
+
+    document.getElementById('stock7')
+    .innerText=vouchers[7].length;
+
+    document.getElementById('stock2')
+    .innerText=vouchers[2].length;
+
+    document.getElementById('stock1')
+    .innerText=vouchers[1].length;
+
+    document.getElementById('stock30')
+    .innerText=vouchers[30].length;
 
     checkEmpty('7');
     checkEmpty('2');
@@ -270,48 +303,55 @@ function updateStocks(){
 }
 
 function checkEmpty(type){
-    const stockElement = document.getElementById('stock'+type);
 
-    if(vouchers[type].length <= 0){
-        stockElement.classList.add('empty');
+    const stock=
+    document.getElementById('stock'+type);
+
+    if(vouchers[type].length<=0){
+
+        stock.classList.add('empty');
     }
 }
 
 function showVoucher(type){
-    currentType = type;
 
-    if(vouchers[type].length <= 0){
+    currentType=type;
+
+    if(vouchers[type].length<=0){
+
         alert('Stok voucher habis');
         return;
     }
 
-    document.getElementById('voucherBox').style.display = 'block';
-    document.getElementById('voucherTitle').innerText = 'Kode Voucher '+type+' Hari';
-    document.getElementById('voucherCode').innerText = vouchers[type][0];
+    document.getElementById('voucherBox')
+    .style.display='block';
+
+    document.getElementById('voucherTitle')
+    .innerText='Kode Voucher '+type+' Hari';
+
+    document.getElementById('voucherCode')
+    .innerText=vouchers[type][0];
 }
 
 function useVoucher(){
-    if(currentType === '') return;
+
+    if(currentType==='') return;
 
     vouchers[currentType].shift();
 
     saveData();
+
     updateStocks();
 
     alert('Voucher berhasil digunakan');
 
-    document.getElementById('voucherBox').style.display = 'none';
+    document.getElementById('voucherBox')
+    .style.display='none';
 }
 
 loadData();
-</script>
 
-<script>
-if('serviceWorker' in navigator){
-    navigator.serviceWorker.register('sw.js');
-}
 </script>
 
 </body>
 </html>
-
